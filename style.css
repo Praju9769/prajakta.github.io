@@ -1,92 +1,58 @@
-body {
+/* Light Theme */
+body.light-mode {
   background-color: #fff0f5;
-  color: #333;
-  font-family: 'Segoe UI', sans-serif;
-  text-align: center;
-  padding: 40px;
+  color: #222;
 }
 
-h1 {
-  color: #ff1493;
-  font-size: 48px;
+/* Dark Theme */
+body.dark-mode {
+  background-color: #1a1a1a;
+  color: #ff69b4;
 }
 
-h2 {
-  color: #d10072;
-  margin-top: 40px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-ul li {
-  font-size: 18px;
-  padding: 5px 0;
-}
-
-img {
-  margin-top: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 10px #ff69b4;
-}
-
+/* Buttons */
 button {
-  background-color: #ff69b4;
+  background-color: hotpink;
   color: white;
-  padding: 15px 30px;
-  font-size: 18px;
+  padding: 12px 25px;
+  font-size: 16px;
   border: none;
-  border-radius: 8px;
+  border-radius: 20px;
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
+  margin: 10px 5px;
+  transition: background-color 0.3s, transform 0.2s ease;
 }
 
 button:hover {
-  background-color: #ff1493;
-}
-#heart {
-  font-size: 40px;
-  animation: bounce 1s infinite;
-  margin-top: 30px;
+  background-color: deeppink;
+  transform: scale(1.05);
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-input {
-  padding: 10px;
-  margin: 10px;
-  font-size: 16px;
-  border: 2px solid #ff69b4;
-  border-radius: 8px;
+/* Volume slider */
+input[type="range"] {
   width: 200px;
+  margin-top: 15px;
+  accent-color: hotpink;
 }
 
-#loveResult {
+/* Floating heart */
+.heart {
+  position: fixed;
+  bottom: -50px;
   font-size: 24px;
-  color: #d10072;
-  margin-top: 20px;
-  font-weight: bold;
-  transition: all 0.3s ease;
-}
-img {
-  border-radius: 20px;
-  box-shadow: 0 0 30px hotpink;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  width: 300px;
+  color: hotpink;
+  animation: float 6s linear infinite;
+  pointer-events: none;
 }
 
-img:hover {
-  transform: rotate(-2deg) scale(1.05);
-  box-shadow: 0 0 40px deeppink;
+/* Bounce animation */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
 }
+
+/* Floating animation */
 @keyframes float {
   0% {
     transform: translateY(0) scale(1);
@@ -98,59 +64,65 @@ img:hover {
   }
 }
 
-.heart {
-  position: fixed;
-  bottom: -50px;
-  font-size: 24px;
-  color: hotpink;
-  animation: float 6s linear infinite;
-  pointer-events: none;
-}
-body.light-mode {
-  background-color: #fff0f5;
-  color: #000;
-}
-
-body.dark-mode {
-  background-color: #1a1a1a;
-  color: #ff69b4;
-}
-
-button {
-  margin-top: 15px;
-}
-/* Light Mood */
-body.light-mode {
-  background-color: #fff0f5;
-  color: #222;
-}
-
-.light-mode button {
-  background-color: hotpink;
-  color: white;
-}
-
-/* Dark Mood */
-body.dark-mode {
-  background-color: #1a1a1a;
-  color: #ff69b4;
-}
-
-.dark-mode button {
-  background-color: deeppink;
-  color: #fff;
-}
-
-/* General Button Style */
-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  margin: 10px 5px;
-  transition: all 0.3s ease;
-}
+/* Smooth transitions */
 body {
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  padding: 40px;
   transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+/* Titles */
+h1 {
+  color: #ff1493;
+  font-size: 48px;
+}
+
+h2 {
+  color: #d10072;
+  margin-top: 40px;
+}
+
+/* List styling */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  font-size: 18px;
+  padding: 5px 0;
+}
+
+/* Image */
+img {
+  margin-top: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 30px hotpink;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  width: 300px;
+}
+
+img:hover {
+  transform: rotate(-2deg) scale(1.05);
+  box-shadow: 0 0 40px deeppink;
+}
+
+/* Input fields */
+input[type="text"] {
+  padding: 10px;
+  margin: 10px;
+  font-size: 16px;
+  border: 2px solid #ff69b4;
+  border-radius: 8px;
+  width: 200px;
+}
+
+/* Love result */
+#loveResult {
+  font-size: 24px;
+  color: #d10072;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
