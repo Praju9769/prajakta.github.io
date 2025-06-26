@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prajakta's Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      transition: background-color 0.6s ease, color 0.6s ease;
+    }
+  </style>
+</head>
+
+<body class="light-mode">
+  <h1>Prajakta Shinde 💖</h1>
+  <p>Passionate, Curious, Unstoppable.</p>
+
+  <h2>✨ About Me</h2>
+  <p>
+    I’m very generous, always a happening person — you’ll never get bored around me 😉<br>
+    I love music, riding my bike, vibing hard... and yeah, I’m a <em>little toxic</em> sometimes 😈<br>
+    But when someone’s in need? I’m always the first to help. 💖
+  </p>
+
+  <h2>💻 Skills</h2>
+  <ul>
+    <li>🏍️ Riding</li>
+    <li>🎨 Drawing</li>
+    <li>💃 Dancing</li>
+    <li>🍳 Cooking</li>
+  </ul>
+
+  <h2>📸 My Vibe</h2>
+  <img src="myphoto.jpg" alt="My Cute Face 😘" />
+
+  <h2>📞 Contact</h2>
+  <p>Email: prajakta.sh41@gmail.com</p>
+
+  <h2>Love Calculator 😍</h2>
+  <input type="text" id="yourName" placeholder="Your Name">
+  <input type="text" id="crushName" placeholder="Crush's Name">
+  <button onclick="calculateLove()">💘 Calculate</button>
+  <p id="loveResult"></p>
+
+  <br><br>
+  <button id="moodBtn" onclick="toggleMood()">🌞 Switch to Night</button>
+  <button id="musicBtn" onclick="toggleMusic()">▶️ Play</button>
+  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)" />
+  <button onclick="surpriseMe()">Click Me, Baby 😘</button>
+  <button onclick="changeMood()">Change My Mood</button>
+
+  <h2 id="moodText">I’m feeling cute today 😘</h2>
+
+  <audio id="bgMusic" loop>
+    <source src="softvibe.mp3" type="audio/mpeg">
+  </audio>
+
+  <canvas id="visualizer" width="600" height="100"></canvas>
+
+  <script>
+    // Mood toggle
+    function toggleMood() {
+      const body = document.body;
+      const btn = document.getElementById("moodBtn");
+
+      if (body.classList.contains("dark-mode")) {
+        body.classList.replace("dark-mode", "light-mode");
+        btn.innerText = "🌞 Switch to Night";
+      } else {
+        body.classList.replace("light-mode", "dark-mode");
+        btn.innerText = "🌙 Switch to Day";
+      }
+    }
+
+    // Auto theme
+    window.onload = function () {
+      const hour = new Date().getHours();
+      const body = document.body;
+      const btn = document.getElementById("moodBtn");
+
+      if (hour >= 19 || hour <= 6) {
+        body.classList.remove("light-mode");
+        body.classList.add("dark-mode");
+        if (btn) btn.innerText = "🌙 Switch to Day";
+      } else {
+        body.classList.remove("dark-mode");
+        body.classList.add("light-mode");
+        if (btn) btn.innerText = "🌞 Switch to Night";
+      }
+    };
+
+    function surpriseMe() {
+      alert("I, love you 💖");
+      document.body.style.backgroundColor = "#ffe4e1";
+    }
+
+    function changeMood() {
+      const moods = ["🔥 Feeling hot!", "💖 Feeling lovely!", "😈 Ready to conquer!", "😎 Chillin’ like a queen"];
+      const randomMood = moods[Math.floor(Math.random() * moods.length)];
+      document.getElementById("moodText").innerText = randomMood;
+    }
+
+    function calculateLove() {
+      let name1 = document.getElementById("yourName").value.trim();
+      let name2 = document.getElementById("crushName").value.trim();
+
+      if (!name1 || !name2) {
+        alert("You forgot the names, gorgeous 😘");
+        return;
+      }
+
+      let loveScore = Math.floor(Math.random() * 100) + 1;
+      let resultText = document.getElementById("loveResult");
+
+      let message = "";
+
+      if (loveScore > 80) {
+        message = `🔥 ${name1} & ${name2} = ${loveScore}%. You're soulmates! 💍💖`;
+      } else if (loveScore > 50) {
+        message = `💘 ${name1} & ${name2} = ${loveScore}%. There’s definitely a spark 😉`;
+      } else if (loveScore > 30) {
+        message = `🫣 ${name1} & ${name2} = ${loveScore}%. Flirty vibes, but complicated…`;
+      } else {
+        message = `💔 ${name1} & ${name2} = ${loveScore}%. Hmm… maybe just friends? 😅`;
+      }
+
+      resultText.innerText = message;
+    }
+
+    function setVolume(vol) {
+      const music = document.getElementById("bgMusic");
+      music.volume = vol;
+    }
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const audioElement = document.getElementById("bgMusic");
+    const canvas = document.getElementById("visualizer");
+    const canvasCtx = canvas.getContext("2d");
+
+    const source = audioCtx.createMediaElementSource(audioElement);
+    const analyser = audioCtx.createAnalyser();
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+
+    analyser.fftSize = 64;
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    function draw() {
+      requestAnimationFrame(draw);
+      analyser.getByteFrequencyData(dataArray);
+      canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const barWidth = (canvas.width / bufferLength) * 2.5;
+      let x = 0;
+
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = dataArray[i];
+        canvasCtx.fillStyle = "#ff69b4";
+        canvasCtx.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight / 2);
+        x += barWidth + 1;
+      }
+    }
+    draw();
+
+    function toggleMusic() {
+      const music = document.getElementById("bgMusic");
+      const btn = document.getElementById("musicBtn");
+
+      if (audioCtx.state === "suspended") {
+        audioCtx.resume();
+      }
+
+      if (music.paused) {
+        music.play();
+        btn.innerText = "⏸️ Pause";
+      } else {
+        music.pause();
+        btn.innerText = "▶️ Play";
+      }
+    }
+  </script>
+</body>
+</html>
