@@ -1,181 +1,168 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Prajakta's Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prajakta ✦ Portfolio 2025</title>
+  <link rel="stylesheet" href="style.css">
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;800&display=swap');
+    :root {
+      --bg-light: #fef6f9;
+      --bg-dark: #181818;
+      --text-light: #222;
+      --text-dark: #fff;
+      --accent: #ff69b4;
+      --glass: rgba(255, 255, 255, 0.25);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Urbanist', sans-serif;
+    }
     body {
-      transition: background-color 0.6s ease, color 0.6s ease;
+      background: var(--bg-light);
+      color: var(--text-light);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 3rem 1rem;
+      transition: all 0.4s ease;
+    }
+    body.dark {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    p.tagline {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+    section.card {
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      padding: 2rem;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    .photo {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--accent);
+      margin: 1rem auto;
+      display: block;
+    }
+    .skills {
+      display: flex;
+      justify-content: space-around;
+      font-size: 1.5rem;
+      padding: 1rem 0;
+    }
+    .btn {
+      padding: 12px 24px;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 1rem auto;
+      display: block;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      opacity: 0.85;
+    }
+    .switch-mode {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    footer {
+      margin-top: auto;
+      font-size: 0.9rem;
+      text-align: center;
+      opacity: 0.6;
     }
   </style>
 </head>
+<body>
+  <button class="switch-mode" onclick="toggleMode()">🌓</button>
+  <header>
+    <h1>Prajakta Shinde</h1>
+    <p class="tagline">✨ Always Vibin'. Little Toxic. Always Sweet ✨</p>
+  </header>
 
-<body class="light-mode">
-  <h1>Prajakta Shinde 💖</h1>
-  <p>Passionate, Curious, Unstoppable.</p>
+  <section class="card">
+    <img src="myphoto.jpg" alt="Prajakta's photo" class="photo">
+    <p>I’m generous, I’m happening, and I’m always the vibe. I ride, I draw, I cook, I slay. Maybe a little toxic 😈 but full of heart 💖</p>
+  </section>
 
-  <h2>✨ About Me</h2>
-  <p>
-    I’m very generous, always a happening person — you’ll never get bored around me 😉<br>
-    I love music, riding my bike, vibing hard... and yeah, I’m a <em>little toxic</em> sometimes 😈<br>
-    But when someone’s in need? I’m always the first to help. 💖
-  </p>
+  <section class="card">
+    <h2>Skills</h2>
+    <div class="skills">
+      <span>🏍️</span>
+      <span>🎨</span>
+      <span>💃</span>
+      <span>🍳</span>
+    </div>
+  </section>
 
-  <h2>💻 Skills</h2>
-  <ul>
-    <li>🏍️ Riding</li>
-    <li>🎨 Drawing</li>
-    <li>💃 Dancing</li>
-    <li>🍳 Cooking</li>
-  </ul>
+  <section class="card">
+    <h2>Love Calculator 😍</h2>
+    <input type="text" id="yourName" placeholder="Your Name">
+    <input type="text" id="crushName" placeholder="Crush's Name">
+    <button class="btn" onclick="calculateLove()">💘 Calculate</button>
+    <p id="loveResult"></p>
+  </section>
 
-  <h2>📸 My Vibe</h2>
-  <img src="myphoto.jpg" alt="My Cute Face 😘" />
-
-  <h2>📞 Contact</h2>
-  <p>Email: prajakta.sh41@gmail.com</p>
-
-  <h2>Love Calculator 😍</h2>
-  <input type="text" id="yourName" placeholder="Your Name">
-  <input type="text" id="crushName" placeholder="Crush's Name">
-  <button onclick="calculateLove()">💘 Calculate</button>
-  <p id="loveResult"></p>
-
-  <br><br>
-  <button id="moodBtn" onclick="toggleMood()">🌞 Switch to Night</button>
-  <button id="musicBtn" onclick="toggleMusic()">▶️ Play</button>
-  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)" />
-  <button onclick="surpriseMe()">Click Me, Baby 😘</button>
-  <button onclick="changeMood()">Change My Mood</button>
-
-  <h2 id="moodText">I’m feeling cute today 😘</h2>
-
-  <audio id="bgMusic" loop>
-    <source src="softvibe.mp3" type="audio/mpeg">
-  </audio>
-
-  <canvas id="visualizer" width="600" height="100"></canvas>
+  <footer>
+    Contact me: <a href="mailto:prajakta.sh41@gmail.com">prajakta.sh41@gmail.com</a>
+  </footer>
 
   <script>
-    // Mood toggle
-    function toggleMood() {
-      const body = document.body;
-      const btn = document.getElementById("moodBtn");
-
-      if (body.classList.contains("dark-mode")) {
-        body.classList.replace("dark-mode", "light-mode");
-        btn.innerText = "🌞 Switch to Night";
-      } else {
-        body.classList.replace("light-mode", "dark-mode");
-        btn.innerText = "🌙 Switch to Day";
-      }
-    }
-
-    // Auto theme
-    window.onload = function () {
-      const hour = new Date().getHours();
-      const body = document.body;
-      const btn = document.getElementById("moodBtn");
-
-      if (hour >= 19 || hour <= 6) {
-        body.classList.remove("light-mode");
-        body.classList.add("dark-mode");
-        if (btn) btn.innerText = "🌙 Switch to Day";
-      } else {
-        body.classList.remove("dark-mode");
-        body.classList.add("light-mode");
-        if (btn) btn.innerText = "🌞 Switch to Night";
-      }
-    };
-
-    function surpriseMe() {
-      alert("I, love you 💖");
-      document.body.style.backgroundColor = "#ffe4e1";
-    }
-
-    function changeMood() {
-      const moods = ["🔥 Feeling hot!", "💖 Feeling lovely!", "😈 Ready to conquer!", "😎 Chillin’ like a queen"];
-      const randomMood = moods[Math.floor(Math.random() * moods.length)];
-      document.getElementById("moodText").innerText = randomMood;
+    function toggleMode() {
+      document.body.classList.toggle('dark');
     }
 
     function calculateLove() {
-      let name1 = document.getElementById("yourName").value.trim();
-      let name2 = document.getElementById("crushName").value.trim();
+      const name1 = document.getElementById("yourName").value.trim();
+      const name2 = document.getElementById("crushName").value.trim();
+      const output = document.getElementById("loveResult");
 
       if (!name1 || !name2) {
-        alert("You forgot the names, gorgeous 😘");
+        alert("Names needed cutie 💖");
         return;
       }
 
-      let loveScore = Math.floor(Math.random() * 100) + 1;
-      let resultText = document.getElementById("loveResult");
-
-      let message = "";
-
-      if (loveScore > 80) {
-        message = `🔥 ${name1} & ${name2} = ${loveScore}%. You're soulmates! 💍💖`;
-      } else if (loveScore > 50) {
-        message = `💘 ${name1} & ${name2} = ${loveScore}%. There’s definitely a spark 😉`;
-      } else if (loveScore > 30) {
-        message = `🫣 ${name1} & ${name2} = ${loveScore}%. Flirty vibes, but complicated…`;
+      const score = Math.floor(Math.random() * 100) + 1;
+      if (score > 80) {
+        output.innerText = `🔥 ${name1} & ${name2} = ${score}%. You're soulmates! 💍`;
+      } else if (score > 50) {
+        output.innerText = `💘 ${name1} & ${name2} = ${score}%. There’s a spark!`;
       } else {
-        message = `💔 ${name1} & ${name2} = ${loveScore}%. Hmm… maybe just friends? 😅`;
-      }
-
-      resultText.innerText = message;
-    }
-
-    function setVolume(vol) {
-      const music = document.getElementById("bgMusic");
-      music.volume = vol;
-    }
-
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const audioElement = document.getElementById("bgMusic");
-    const canvas = document.getElementById("visualizer");
-    const canvasCtx = canvas.getContext("2d");
-
-    const source = audioCtx.createMediaElementSource(audioElement);
-    const analyser = audioCtx.createAnalyser();
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
-
-    analyser.fftSize = 64;
-    const bufferLength = analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-
-    function draw() {
-      requestAnimationFrame(draw);
-      analyser.getByteFrequencyData(dataArray);
-      canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const barWidth = (canvas.width / bufferLength) * 2.5;
-      let x = 0;
-
-      for (let i = 0; i < bufferLength; i++) {
-        const barHeight = dataArray[i];
-        canvasCtx.fillStyle = "#ff69b4";
-        canvasCtx.fillRect(x, canvas.height - barHeight / 2, barWidth, barHeight / 2);
-        x += barWidth + 1;
-      }
-    }
-    draw();
-
-    function toggleMusic() {
-      const music = document.getElementById("bgMusic");
-      const btn = document.getElementById("musicBtn");
-
-      if (audioCtx.state === "suspended") {
-        audioCtx.resume();
-      }
-
-      if (music.paused) {
-        music.play();
-        btn.innerText = "⏸️ Pause";
-      } else {
-        music.pause();
-        btn.innerText = "▶️ Play";
+        output.innerText = `😬 ${name1} & ${name2} = ${score}%. Could work... maybe 😅`;
       }
     }
   </script>
